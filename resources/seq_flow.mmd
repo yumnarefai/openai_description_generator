@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant M as Main
+    participant P as OpenAPIParser
+    participant G as DescriptionGenerator
+    participant U as OpenAPIUpdater
+    M->>P: parse(file_path)
+    P-->>M: openapi_spec
+    M->>P: extract_resources()
+    P-->>M: resources
+    loop for each resource
+        M->>G: generate_description(resource)
+        G-->>M: description
+    end
+    M->>U: update_specification(resources_with_descriptions)
+    M->>U: save_updated_specification(file_path)
