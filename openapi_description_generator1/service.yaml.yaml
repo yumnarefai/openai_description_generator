@@ -1,0 +1,258 @@
+openapi: 3.0.1
+info:
+  title: /
+  version: 0.1.0
+servers:
+- url: "{server}:{port}/"
+  variables:
+    server:
+      default: http://localhost
+    port:
+      default: "8080"
+paths:
+  /book:
+    get:
+      operationId: getBook
+      parameters:
+      - name: bookId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: NotFound
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookRecord'
+    put:
+      operationId: putBook
+      parameters:
+      - name: bookId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        "404":
+          description: NotFound
+        "200":
+          description: Ok
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      operationId: postBook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        "409":
+          description: Conflict
+        "201":
+          description: Created
+          content:
+            text/plain:
+              schema:
+                type: string
+    delete:
+      operationId: deleteBook
+      parameters:
+      - name: bookId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: NotFound
+        "200":
+          description: Ok
+          content:
+            text/plain:
+              schema:
+                type: string
+  /books:
+    get:
+      operationId: getBooks
+      responses:
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookRecord'
+  /booksByTitle:
+    get:
+      operationId: getBooksbytitle
+      parameters:
+      - name: bookTitle
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookRecord'
+  /booksByYear:
+    get:
+      operationId: getBooksbyyear
+      parameters:
+      - name: year
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookRecord'
+  /booksByAuthor:
+    get:
+      operationId: getBooksbyauthor
+      parameters:
+      - name: authorName
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookRecord'
+  /hasBook:
+    get:
+      operationId: getHasbook
+      parameters:
+      - name: bookTitle
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /countBooks:
+    get:
+      operationId: getCountbooks
+      responses:
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+components:
+  schemas:
+    Book:
+      required:
+      - author
+      - isbn
+      - title
+      - year
+      type: object
+      properties:
+        title:
+          type: string
+        author:
+          $ref: '#/components/schemas/Author'
+        year:
+          type: integer
+          format: int64
+        isbn:
+          type: string
+    Author:
+      required:
+      - name
+      - nationality
+      type: object
+      properties:
+        name:
+          type: string
+        nationality:
+          type: string
+    BookRecord:
+      required:
+      - book
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        book:
+          $ref: '#/components/schemas/Book'
