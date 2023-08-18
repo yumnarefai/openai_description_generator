@@ -8,6 +8,8 @@ The docs directory contains the following:
 3. API Specification and Tasks Document created by AI Agent Eve (Project Manager)
 4. AI Agent Alex (Engineer) has implemented the code for description_generator.py, main.py, openapi_parser.py, openapi_updater.py
 
+The resources directory contains illustrations of the competitive analysis, data API design and sequential flow.
+
 ### How to run
 1. Ensure you have installed the libraries listed in requirements.txt
 2. Go into the OpenAPI_description_generator1 directory
