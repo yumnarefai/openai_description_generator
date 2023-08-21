@@ -11,10 +11,10 @@ The docs directory contains the following:
 The resources directory contains illustrations of the competitive analysis, data API design and sequential flow.
 
 ### How to run
-1. Ensure you have installed the libraries listed in requirements.txt
+1. Ensure you have installed the libraries listed in requirements.txt (optional)
 2. Go into the OpenAPI_description_generator1 directory
-3. Insert the path to sample.yaml file and openAI key in line 39 of main.py
+3. Insert the path to sample.yaml file and the openAI key in line 39 of main.py
 4. Run main.py
-5. You will obtain a new.yaml in the same folder containing the resource descriptions.
+5. You will obtain a updated-[file_name].yaml containing the resource descriptions.
 
-
+The updated yaml file with the resource descriptions will be saved in the same directory as that which stores the file with missing resource descriptions.
