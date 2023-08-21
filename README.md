@@ -1,5 +1,5 @@
 # OpenAPI Description Generator
-This tool is designed to add descriptions for each resource defined in an OpenAPI specification. 
+This tool was created by MetaGPT (Multi-agents system) and is designed to add descriptions for each resource defined in an OpenAPI specification. 
 
 ## Docs & Resources
 The docs directory contains the following:
